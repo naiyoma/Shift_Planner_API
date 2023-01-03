@@ -1,7 +1,15 @@
 import uuid
 from django.db import models
+from datetime import datetime
 from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
+
+
+SHIFT_CHOICES = (
+    ('00:00:00-08:00:00', '00:00:00-08:00:00'),
+    ('08:00:00-16:00:00', '08:00:00-16:00:00'),
+    ('16:00:00-00:00:00', '16:00:00-00:00:00'),
+)
 
 
 class CustomUser(AbstractUser):
@@ -26,3 +34,18 @@ class CustomUser(AbstractUser):
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
+
+
+class UserShift(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    date = models.DateField(default=datetime.now)
+    shift = models.CharField(max_length=20, choices=SHIFT_CHOICES)
+    title = models.CharField(max_length=50, null=True, blank=True)
+    description = models.CharField(max_length=300, null=True, blank=True)
+
+    class Meta:
+        unique_together = ('user', 'date')
+    
+    def __str__(self):
+        return f'{self.user.username} {self.date} {self.shift}'

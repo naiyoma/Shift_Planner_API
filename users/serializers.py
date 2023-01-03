@@ -1,13 +1,12 @@
-from .models import CustomUser
+from .models import CustomUser, UserShift
 from rest_framework import serializers
-
-
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = [
-            'email'
+            'id', 'email', 'username', 'date_joined', 'last_login',
+            'is_admin', 'is_staff', 'department', 'position'
         ]
 class CustomerUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,3 +33,25 @@ class CustomeRegisterSerializer(serializers.ModelSerializer):
         fields = ('username', 'password', 
                 'email', 'is_staff', 
                 'department', 'position')
+
+
+
+class UserLoginSerializer(serializers.ModelSerializer):
+    email = serializers.CharField(max_length=25)
+    password = serializers.CharField(
+        label=('Password'),
+        style={'input_type': 'password'},
+        trim_whitespace=False,
+        max_length=128,
+        write_only=True
+    )
+    def validate(self, data):
+        import pdb; pdb.set_trace()
+
+class UserShiftsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserShift
+        fields = (
+            'user__username', 'user__department', 'user__position',
+            'shift', 'date', 'title', 'description'
+        )
