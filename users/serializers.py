@@ -4,11 +4,11 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
-    model = CustomUser
-    fields = [
-        'email', 'username', 'date_joined', 'last_login',
-        'is_staff', 'department', 'position'
-    ]
+    class Meta:
+        model = CustomUser
+        fields = [
+            'email'
+        ]
 class CustomerUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
@@ -22,11 +22,15 @@ class CustomeRegisterSerializer(serializers.ModelSerializer):
         user = CustomUser.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
+            email=validated_data['email'],
+            is_staff=validated_data['is_staff'],
+            department=validated_data['department'],
+            position=validated_data['position']
         )
         return user
 
     class Meta:
         model = CustomUser
-        fields = ('password', 'username', 'first_name', 'last_name',)
+        fields = ('username', 'password', 
+                'email', 'is_staff', 
+                'department', 'position')
