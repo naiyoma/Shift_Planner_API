@@ -1,4 +1,4 @@
-from .models import CustomUser
+from .models import CustomUser, UserShift
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 from django.contrib.auth import authenticate, login
 from rest_framework.mixins import CreateModelMixin, ListModelMixin
-from .serializers import CustomeRegisterSerializer, CustomerUserDetailSerializer, UserSerializer
+from .serializers import CustomeRegisterSerializer, CustomerUserDetailSerializer, UserSerializer, UserShiftSerializer
 
 # Create your views here.
 class UserRegistrationView(CreateModelMixin, GenericViewSet):
@@ -29,3 +29,8 @@ class LoginView(APIView):
             return Response({'status': 'success'})
         else:
             return Response({'status': 'User Not Found'})
+
+class UserShiftViewSet(CreateModelMixin, GenericViewSet):
+    queryset = UserShift.objects.all()
+    serializer_class= UserShiftSerializer
+

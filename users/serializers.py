@@ -48,10 +48,12 @@ class UserLoginSerializer(serializers.ModelSerializer):
     def validate(self, data):
         import pdb; pdb.set_trace()
 
-class UserShiftsSerializer(serializers.ModelSerializer):
+class UserShiftSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserShift
         fields = (
-            'user__username', 'user__department', 'user__position',
+            'user', 'id'
             'shift', 'date', 'title', 'description'
         )
+
+# class UserShiftListSerializer(serializers.ModelSerializer):
