@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 from django.contrib.auth import authenticate, login
 from rest_framework.mixins import CreateModelMixin, ListModelMixin
-from .serializers import CustomeRegisterSerializer, CustomerUserDetailSerializer, UserSerializer, UserShiftSerializer
+from .serializers import CustomeRegisterSerializer, CustomerUserDetailSerializer, UserSerializer, UserShiftSerializer, UserShiftListSerializer
 
 # Create your views here.
 class UserRegistrationView(CreateModelMixin, GenericViewSet):
@@ -34,3 +34,7 @@ class UserShiftViewSet(CreateModelMixin, GenericViewSet):
     queryset = UserShift.objects.all()
     serializer_class= UserShiftSerializer
 
+class UserShiftListView(ListModelMixin, GenericViewSet):
+    queryset = UserShift.objects.all()
+    serializer_class = UserShiftListSerializer
+    

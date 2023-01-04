@@ -5,8 +5,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = [
-            'id', 'email', 'username', 'date_joined', 'last_login',
-            'is_admin', 'is_staff', 'department', 'position'
+            'id', 'email', 'username', 'date_joined', 'last_login', 'is_admin', 'is_staff', 'department', 'position'
         ]
 class CustomerUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,9 +29,9 @@ class CustomeRegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'password', 
-                'email', 'is_staff', 
-                'department', 'position')
+        fields = (
+            'username', 'password', 'email', 'is_staff', 'department', 'position'
+        )
 
 
 
@@ -52,8 +51,14 @@ class UserShiftSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserShift
         fields = (
-            'user', 'id'
-            'shift', 'date', 'title', 'description'
+            'user', 'id', 'shift', 'date', 'title', 'description'
         )
 
-# class UserShiftListSerializer(serializers.ModelSerializer):
+class UserShiftListSerializer(serializers.ModelSerializer):
+    user_name = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = UserShift
+        fields = (
+            'id', 'user', 'user_name','shift', 'date', 'title', 'description'
+        )
