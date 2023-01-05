@@ -30,7 +30,7 @@ class CustomeRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = (
-            'username', 'password', 'email', 'is_staff', 'department', 'position'
+           'id', 'username', 'password', 'email', 'is_staff', 'department', 'position'
         )
 
 
