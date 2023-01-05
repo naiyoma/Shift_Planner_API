@@ -20,6 +20,7 @@ class CustomerUserViewSetTestCase(TestCase):
     
     
     def test_create_user_without_email(self):
-        self.user_data['email'] = ''
+        self.user_data['username'] = ""
         response = self.client.post(self.url, self.user_data)
         self.assertEqual(response.status_code, 400)
+        self.assertEqual(CustomUser.objects.count(), 0)
