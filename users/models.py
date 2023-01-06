@@ -39,7 +39,7 @@ class CustomUser(AbstractUser):
 class UserShift(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
-    date = models.DateField(default=datetime.now)
+    date = models.DateField(blank=False)
     shift = models.CharField(max_length=20, choices=SHIFT_CHOICES)
     title = models.CharField(max_length=50, null=True, blank=True)
     description = models.CharField(max_length=300, null=True, blank=True)

@@ -44,8 +44,6 @@ class UserLoginSerializer(serializers.ModelSerializer):
         max_length=128,
         write_only=True
     )
-    def validate(self, data):
-        import pdb; pdb.set_trace()
 
 class UserShiftSerializer(serializers.ModelSerializer):
     class Meta:

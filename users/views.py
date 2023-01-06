@@ -20,7 +20,6 @@ class UserListView(ListModelMixin, GenericViewSet):
 
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
-        import pdb; pdb.set_trace()
         email = request.data.get('email')
         password = request.data.get('password')
         user = authenticate(request, email=email, password=password)
