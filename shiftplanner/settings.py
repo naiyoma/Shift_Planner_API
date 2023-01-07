@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'allauth.socialaccount',
-    'shift',
     'users'
 ]
 

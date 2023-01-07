@@ -7,7 +7,6 @@ from .models import CustomUser, UserShift
 from .serializers import CustomeRegisterSerializer
 
 # Create your tests here.
-
 class UserShiftViewSetTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
@@ -63,3 +62,32 @@ class UserShiftViewSetTestCase(TestCase):
         self.assertEqual(shift_response1.status_code, 400)
 
 
+    def test_create_custom_user_without_email(self):
+        """
+        Test Invalid data on User.
+        """
+        self.user_data['email'] = ''
+        response = self.client.post(self.url, self.user_data)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(CustomUser.objects.count(), 1)
+
+    def test_filter_shifts_by_user(self):
+        self.user = CustomUser.objects.create(
+            username='test_user',
+            password='12345',
+            email='test@example.com',
+            is_staff=True,
+            department='Product',
+            position='Developer'
+        )
+        self.shift = UserShift.objects.create(
+            user=self.user,
+            date='2022-09-09',
+            shift='08:00:00-16:00:00',
+            title='Test Shift',
+            description='This is a test shift'
+        )
+        user_id = self.user.id
+        response = self.client.get(f'/shifts/<uuid:{user_id}>/')
+        import pdb;pdb.set_trace()
+        self.assertEqual(response.status_code, 200)

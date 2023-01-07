@@ -9,9 +9,9 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 class CustomerUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
-        fields = ('email', 'username', 'department')
-        read_only_fields= ('email',)
+        model = UserShift
+        fields = '__all__'
+        
 
 class CustomeRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
