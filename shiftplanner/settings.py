@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'allauth.socialaccount',
-    'users'
+    'users',
+    'rest_framework_swagger'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -141,3 +142,6 @@ REST_AUTH_SERIALIZERS = {
 REST_AUTH_REGISTER_SERIALIZERS = {
     "REGISTER_SERIALIZER": "users.serializers.CustomeRegisterSerializer",
 }
+
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
+

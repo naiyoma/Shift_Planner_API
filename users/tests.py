@@ -72,6 +72,9 @@ class UserShiftViewSetTestCase(TestCase):
         self.assertEqual(CustomUser.objects.count(), 1)
 
     def test_filter_shifts_by_user(self):
+        """
+        Test that a user can filter shifts based on ID.
+        """
         self.user = CustomUser.objects.create(
             username='test_user',
             password='12345',
@@ -88,6 +91,5 @@ class UserShiftViewSetTestCase(TestCase):
             description='This is a test shift'
         )
         user_id = self.user.id
-        response = self.client.get(f'/shifts/<uuid:{user_id}>/')
-        import pdb;pdb.set_trace()
+        response = self.client.get(f'/shifts/{user_id}/')
         self.assertEqual(response.status_code, 200)
