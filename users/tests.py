@@ -10,8 +10,8 @@ from .serializers import CustomeRegisterSerializer
 class UserShiftViewSetTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
-        self.url = '/createuser/'
-        self.shift_url = '/create_shift/'
+        self.url = '/api/createuser/'
+        self.shift_url = '/api/create_shift/'
         self.user_data = {
             'id': str(uuid.uuid4()),
             'username': 'MonaLisa',
@@ -91,5 +91,5 @@ class UserShiftViewSetTestCase(TestCase):
             description='This is a test shift'
         )
         user_id = self.user.id
-        response = self.client.get(f'/shifts/{user_id}/')
+        response = self.client.get(f'/api/shifts/{user_id}/')
         self.assertEqual(response.status_code, 200)

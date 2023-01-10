@@ -42,7 +42,6 @@ class UserShiftDetailListView(ListModelMixin, GenericViewSet):
     serializer_class = CustomerUserDetailSerializer
 
     def get_queryset(self):
-        # import pdb; pdb.set_trace()
         user_id = self.kwargs.get('user_id', None)
         if user_id is not None:
             return UserShift.objects.filter(user__id=user_id)
