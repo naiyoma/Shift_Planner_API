@@ -3,7 +3,7 @@
 This API allows for the creation and management of shifts for a given organization. The API provides endpoints for creating and viewing shifts, as well as endpoints for user registration and management.
 
 ### Running the API locally
-1. Clone the repository: `git clone https://github.com/<your-username>/shift-management-api.git`
+1. Clone the repository: `git clone https://github.com/naiyoma/Shift_Planner_API.git`
 
 2. Navigate into the project directory: `cd shift-management-api`
 
