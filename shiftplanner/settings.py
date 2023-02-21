@@ -23,10 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6uhea5r1dqi9^(fmboed!0mi^=g72e5z=^azu=q3ssilg))ury'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = []
 
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')    
+ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 # Application definition
 
 INSTALLED_APPS = [
@@ -90,8 +93,12 @@ WSGI_APPLICATION = 'shiftplanner.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ShiftPlanning_DB',
+        'USER': 'naiyoma',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
