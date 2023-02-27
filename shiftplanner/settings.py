@@ -27,7 +27,7 @@ SECRET_KEY = '6uhea5r1dqi9^(fmboed!0mi^=g72e5z=^azu=q3ssilg))ury'
 # DEBUG = True
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')    
 ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
