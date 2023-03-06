@@ -105,10 +105,15 @@ WSGI_APPLICATION = 'shiftplanner.wsgi.application'
 
 
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'iEXOIUVYSXFje0cBUinw',
+        'HOST': 'containers-us-west-144.railway.app',
+        'PORT': '7041',
     }
 }
 # Password validation
