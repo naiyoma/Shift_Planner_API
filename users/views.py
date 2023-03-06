@@ -52,3 +52,8 @@ class UserShiftDetailListView(ListModelMixin, GenericViewSet):
 class OrganizationViewSet(CreateModelMixin, GenericViewSet):
     queryset = Organization.objects.all()
     serializer_class= OrganizationSerializer
+
+
+class OrgListView(ListModelMixin, GenericViewSet):
+    queryset = Organization.objects.all()
+    serializer_class = OrganizationSerializer
