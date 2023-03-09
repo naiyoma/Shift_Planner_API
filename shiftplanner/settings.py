@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'allauth.socialaccount',
     'users',
-    'rest_framework_swagger'
+    'rest_framework_swagger',
+    'corsheaders'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -151,7 +153,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-
+CORS_ORIGIN_ALLOW_ALL = True
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
