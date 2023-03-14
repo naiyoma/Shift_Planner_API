@@ -12,6 +12,13 @@ class CustomerUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserShift
         fields = '__all__'
+
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = '__all__'
         
 
 class CustomeRegisterSerializer(serializers.ModelSerializer):

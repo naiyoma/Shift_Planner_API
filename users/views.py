@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login
 from rest_framework.authtoken.models import Token
 from rest_framework import status
 from rest_framework.mixins import CreateModelMixin, ListModelMixin
-from .serializers import CustomeRegisterSerializer, CustomerUserDetailSerializer, UserSerializer, UserShiftSerializer, UserShiftListSerializer, OrganizationSerializer, LoginSerializer
+from .serializers import CustomeRegisterSerializer, CustomerUserDetailSerializer, UserSerializer, UserShiftSerializer, UserShiftListSerializer, OrganizationSerializer, LoginSerializer, UserDetailSerializer
 
 # Create your views here.
 class UserRegistrationView(CreateModelMixin, GenericViewSet):
@@ -26,7 +26,7 @@ class LoginView(APIView):
         if serializer.is_valid():
             user = serializer.validated_data['user']
             token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key}, status=status.HTTP_200_OK)
+            return Response({'token': token.key, 'user_id':user.id}, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -48,6 +48,15 @@ class UserShiftDetailListView(ListModelMixin, GenericViewSet):
             return UserShift.objects.filter(user__id=user_id)
         return UserShift.objects.all()
 
+class UserCustomerDetailsListView(ListModelMixin, GenericViewSet):
+    serializer_class = UserDetailSerializer
+
+    def get_queryset(self):
+        id = self.kwargs.get('id', None)
+        if id is not None:
+            return CustomUser.objects.filter(id=id)
+        return CustomUser.objects.all()
+    
 
 class OrganizationViewSet(CreateModelMixin, GenericViewSet):
     queryset = Organization.objects.all()
